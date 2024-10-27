@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="/productos/web/css/editarProducto.css"> <!-- Asegúrate de tener este archivo CSS -->
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Actualizar Producto</h1>
+            <nav>
+                <ul>
+                    <li><a href="/productos/almacen" class="btn">Volver al Almacén</a></li>
+                    <li><a href="/logout" class="btn">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form action="/productos/editar" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<%= product.id %>">
+                <input type="hidden" name="fotoVieja" value="<%= product.foto %>">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre del Producto</label>
+                    <input type="text" id="nombre" name="nombre" value="<%= product.nombre %>" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="4" required><%= product.descripcion %></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input type="number" id="stock" name="stock" min="0" value="<%= product.stock %>" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tipoProducto">Tipo de Producto</label>
+                    <select id="tipoProducto" name="tipoProducto" required>
+                        <option value="" disabled>Seleccione el tipo</option>
+                        <option value="Electronico" <%= product.tipoProducto === 'Electronico' ? 'selected' : '' %>>Electrónico</option>
+                        <option value="Ropa" <%= product.tipoProducto === 'Ropa' ? 'selected' : '' %>>Ropa</option>
+                        <option value="Alimentos" <%= product.tipoProducto === 'Alimentos' ? 'selected' : '' %>>Alimentos</option>
+                        <option value="Otro" <%= product.tipoProducto === 'Otro' ? 'selected' : '' %>>Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="foto">Foto del Producto</label>
+                    <input type="file" id="foto" name="foto" accept="image/*">
+                    <div class="current-photo">
+                        <p>Foto actual:</p>
+                        <img src="/productos/uploads/images/<%= product.foto %>" alt="Foto del Producto" class="product-photo">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn submit-btn">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 - Milojas</p>
+    </footer>
+</body>
+</html>

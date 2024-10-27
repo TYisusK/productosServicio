@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almacén de Productos</title>
+    <link rel="stylesheet" href="/productos/web/css/almacen.css"> <!-- Asegúrate de tener este archivo CSS -->
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Almacén de Productos</h1>
+            <nav>
+                <ul>
+                    <li><a href="/productos/almacen" class="btn">Inicio</a></li>
+                    <li><a href="/productos/altaProductos" class="btn">Añadir Producto</a></li>
+                    <li><a href="/usuarios/usuarios" class="btn">Usuarios</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Foto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% productos.forEach(producto => { %>
+                    <tr>
+                        <td><%= producto.id %></td>
+                        <td><%= producto.nombre %></td>
+                        <td><%= producto.descripcion %></td>
+                        <td><img src="/productos/uploads/images/<%= producto.foto %>"  class="product-image"></td>
+                        <td>
+                            <a href="/productos/editar/<%= producto.id %>" class="btn edit-btn">Editar</a>
+                            <a href="/productos/borrar/<%= producto.id %>" class="btn delete-btn" onclick="return confirm('¿Estás seguro de que deseas borrar este producto?');">Borrar</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 - Milojas</p>
+    </footer>
+    
+    <script src="/web/js/scripts.js"></script> <!-- Añade scripts si es necesario -->
+</body>
+</html>
